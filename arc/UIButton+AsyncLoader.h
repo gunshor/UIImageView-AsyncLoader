@@ -1,5 +1,5 @@
 //
-//  UIImageView+AsyncLoader.h
+//  UIButton+AsyncLoader.h
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 5/4/12.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIAsyncImageLoader.h"
 
-@interface UIImageView (AsyncLoader)
+@interface UIButton (AsyncLoader)
 
 -(void)loadImageFromURL:(NSString *)urlString withActivityIndicator:(BOOL)activityIndicator style:(UIActivityIndicatorViewStyle)style;
 -(void)loadImageFromURL:(NSString*)urlString;
