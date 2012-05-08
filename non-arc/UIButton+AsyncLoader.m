@@ -1,19 +1,20 @@
 //
-//  UIImageView+AsyncLoader.m
+//  UIButton+AsyncLoader.m
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 5/4/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "UIImageView+AsyncLoader.h"
+#import "UIButton+AsyncLoader.h"
 
-@implementation UIImageView (AsyncLoader)
+@implementation UIButton (AsyncLoader)
 
 -(void)loadImageFromURL:(NSString *)urlString{
   [UIAsyncImageLoader imageFromURL:[NSURL URLWithString:urlString] andBlock:^(UIImage * image)
    {
-     [self setImage:image];
+     [self setImage:image forState:UIControlStateNormal];
+     [self setUserInteractionEnabled:YES];
    } ErrorBlock:^(void){
      NSLog (@"error! could not load url: %@", urlString);
    }];
@@ -27,15 +28,18 @@
     [self addSubview:view];
     [view startAnimating];
   }
+  
   [UIAsyncImageLoader imageFromURL:[NSURL URLWithString:urlString] andBlock:^(UIImage * image)
    {
-     [self setImage:image];
+     [self setImage:image forState:UIControlStateNormal];
+     [self setUserInteractionEnabled:YES];
      if (view != nil) {
        [view stopAnimating];
        [view removeFromSuperview];
-       [view dealloc]
+       [view dealloc];
      }
-   } ErrorBlock:^(void){
+   }
+   ErrorBlock:^(void){
      NSLog (@"error! could not load url: %@", urlString);
      if (view != nil) {
        [view stopAnimating];
@@ -44,6 +48,5 @@
      }
    }];
 }
-
 
 @end
